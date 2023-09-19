@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Button Form</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .form-container {
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            background-color: #f2f2f2;
+            width: 400px;
+            max-width: 80%;
+            position: relative;
+        }
+
+        label {
+            font-size: 20px;
+            color: #333;
+        }
+
+        .finished-label {
+            color: #4CAF50;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        label#question {
+            font-size: 24px;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            width: 150px;
+        }
+
+        input[type="submit"] {
+            font-size: 18px;
+            padding: 10px 20px;
+            background-color: #ff5722;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 150px;
+        }
+
+        .new-game-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <form method="post" action="{% url 'questions' %}">
+            {% csrf_token %}
+            <button class="new-game-button" type="submit" name="selected_button" value="new_game" id="button3">New Game</button>
+            <h2>Millionaire</h2>
+            <label for="score">Score: {{score}}</label>
+            <br>
+            <br><br>
+            {% if finished %}
+                <label id="finished" class="finished-label">Finished:</label>
+                <br>
+                <label>{{ finished }}</label>
+                <br><br>
+            {% endif %}
+            <label id="question">Question:</label>
+            <br>
+            <label>{{question}}</label>
+            <br><br>
+            <label for="answer">Answer:</label>
+            <br>
+            <label id="answer">{{state}}   {{right_one}}</label>
+            <br><br>
+            <button type="submit" name="selected_button" value="ans1" id="button1">{{ ans1 }}</button>
+            <button type="submit" name="selected_button" value="ans2" id="button2">{{ ans2 }}</button>
+            <br><br>
+            <button type="submit" name="selected_button" value="ans3" id="button3">{{ ans3 }}</button>
+            <button type="submit" name="selected_button" value="ans4" id="button4">{{ ans4 }}</button>
+            <br><br>
+        </form>
+    </div>
+</body>
+</html>
